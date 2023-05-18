@@ -27,7 +27,7 @@ namespace CourierTests
             Parcel parcel = new Parcel(30, 30, 30);
 
             // Act
-            double totalCost = ShippingService.CalculateTotalCost(parcel);
+            double totalCost = parcel.CalculateTotalCost(parcel);
 
             // Assert
             Assert.AreEqual(8.0, totalCost);
@@ -40,7 +40,7 @@ namespace CourierTests
             Parcel parcel = new Parcel(80, 80, 80);
 
             // Act
-            double totalCost = ShippingService.CalculateTotalCost(parcel);
+            double totalCost = parcel.CalculateTotalCost(parcel);
 
             // Assert
             Assert.AreEqual(15.0, totalCost);
@@ -53,7 +53,7 @@ namespace CourierTests
             Parcel parcel = new Parcel(120, 120, 120); 
 
             // Act
-            double totalCost = ShippingService.CalculateTotalCost(parcel);
+            double totalCost = parcel.CalculateTotalCost(parcel);
 
             // Assert
             Assert.AreEqual(25.0, totalCost);
