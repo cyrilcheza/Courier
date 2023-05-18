@@ -74,6 +74,8 @@ namespace CourierTests
             Assert.AreEqual(15.0, totalCost);
         }
 
+
+
         [TestMethod]
         public void CalculateTotalCost_LargeParcel_ExceedsWeightLimit_ReturnsCorrectCost()
         {
@@ -113,6 +115,33 @@ namespace CourierTests
 
             // Assert
             Assert.AreEqual(27.0, totalCost);
+        }
+
+
+        [TestMethod]
+        public void CalculateTotalCost_HeavyParcelWithinWeightLimit_ReturnsHeavyParcelCost()
+        {
+            // Arrange
+            Parcel parcel = new Parcel(30, 30, 30, 40);
+
+            // Act
+            double actualCost = parcel.CalculateTotalCost();
+
+            // Assert
+            Assert.AreEqual(82, actualCost);
+        }
+
+        [TestMethod]
+        public void CalculateTotalCost_HeavyParcelExceedsWeightLimit_ReturnsHeavyParcelCostWithExcessWeightCharge()
+        {
+            // Arrange
+            Parcel parcel = new Parcel(30, 30, 30, 50);
+
+            // Act
+            double actualCost = parcel.CalculateTotalCost();
+
+            // Assert
+           Assert.AreEqual(82, actualCost);
         }
     }
 }
