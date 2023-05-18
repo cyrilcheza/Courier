@@ -135,13 +135,13 @@ namespace CourierTests
         public void CalculateTotalCost_HeavyParcelExceedsWeightLimit_ReturnsHeavyParcelCostWithExcessWeightCharge()
         {
             // Arrange
-            Parcel parcel = new Parcel(30, 30, 30, 50);
+            Parcel parcel = new Parcel(30, 30, 30, 60);
 
             // Act
             double actualCost = parcel.CalculateTotalCost();
 
             // Assert
-           Assert.AreEqual(82, actualCost);
+           Assert.AreEqual(112, actualCost);
         }
     }
 }

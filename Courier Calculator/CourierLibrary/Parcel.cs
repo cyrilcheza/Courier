@@ -12,7 +12,10 @@
         private const double LargeParcelWeightLimit = 6;
         private const double XLParcelWeightLimit = 10;
 
-        private readonly double _weight;
+        private const double HeavyParcelWeightLimit = 50;
+        private double HeavyExcessPlaceholder = 0;
+
+        private double _weight { get; set; }
         private readonly double _length;
         private readonly double _width;
         private readonly double _height;
@@ -53,6 +56,14 @@
 
         private double CalculateExcessWeight()
         {
+
+            if (_weight > HeavyParcelWeightLimit)
+            {
+                //temp change the weight here
+                HeavyExcessPlaceholder =  _weight - HeavyParcelWeightLimit;
+                _weight = HeavyParcelWeightLimit; 
+            }
+
             double excessWeight = _weight - GetWeightLimit();
             return excessWeight > 0 ? excessWeight : 0;
         }
@@ -79,6 +90,10 @@
 
         private double CalculateCost(double baseCost, double weightLimit, double excessWeight)
         {
+            if (HeavyExcessPlaceholder != 0)
+            {
+                return baseCost + (excessWeight * 2) + HeavyExcessPlaceholder;
+            }
             return baseCost + (excessWeight * 2);
         }
     }
