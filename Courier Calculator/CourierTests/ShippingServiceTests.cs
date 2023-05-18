@@ -6,11 +6,12 @@ namespace CourierTests
     [TestClass]
     public class ShippingServiceTests
     {
+        //1,3,6,10
         [TestMethod]
-        public void ShippingServiceTotalCost_Small_ParcelWithoutSpeedyShipping_CorrectCost()
+        public void CalculateTotalCost_SmallParcel_WithinWeightLimit_ReturnsCorrectCost()
         {
             // Arrange
-            Parcel parcel = new Parcel(1, 1, 1);
+            Parcel parcel = new Parcel(5, 5, 5, 1); // Small parcel within weight limit
             ShippingService service = new ShippingService(parcel, false);
 
             // Act
@@ -21,28 +22,24 @@ namespace CourierTests
         }
 
         [TestMethod]
-        public void ShippingServiceTotalCost_Small_ParcelWithSpeedyShipping_CorrectCost()
+        public void CalculateTotalCost_SmallParcel_ExceedsWeightLimit_ReturnsCorrectCost()
         {
             // Arrange
-            Parcel parcel = new Parcel(1, 1, 1);
-            ShippingService service = new ShippingService(parcel, true);
-
+            Parcel parcel = new Parcel(5, 5, 5, 2); // Small parcel exceeds weight limit
+            ShippingService service = new ShippingService(parcel, false);
             // Act
             double totalCost = service.ShippingServiceTotalCost();
-            double parcelBaseCost = service.BaseCost();
 
             // Assert
-            Assert.AreEqual(6.0, totalCost);
-            Assert.AreEqual(3.0, parcelBaseCost);
+            Assert.AreEqual(5.0, totalCost);
         }
 
         [TestMethod]
-        public void ShippingServiceTotalCost_Medium_ParcelWithoutSpeedyShipping_CorrectCost()
+        public void CalculateTotalCost_MediumParcel_WithinWeightLimit_ReturnsCorrectCost()
         {
             // Arrange
-            Parcel parcel = new Parcel(30, 30, 30);
+            Parcel parcel = new Parcel(20, 20, 20, 2); // Medium parcel within weight limit
             ShippingService service = new ShippingService(parcel, false);
-
             // Act
             double totalCost = service.ShippingServiceTotalCost();
 
@@ -51,26 +48,23 @@ namespace CourierTests
         }
 
         [TestMethod]
-        public void ShippingServiceTotalCost_Medium_ParcelWithSpeedyShipping_CorrectCost()
+        public void CalculateTotalCost_MediumParcel_ExceedsWeightLimit_ReturnsCorrectCost()
         {
             // Arrange
-            Parcel parcel = new Parcel(30, 30, 30);
-            ShippingService service = new ShippingService(parcel, true);
-
+            Parcel parcel = new Parcel(20, 20, 20, 4.5); // Medium parcel exceeds weight limit
+            ShippingService service = new ShippingService(parcel, false);
             // Act
             double totalCost = service.ShippingServiceTotalCost();
-            double parcelBaseCost = service.BaseCost();
 
             // Assert
-            Assert.AreEqual(16.0, totalCost);
-            Assert.AreEqual(8.0, parcelBaseCost);
+            Assert.AreEqual(11.0, totalCost);
         }
 
         [TestMethod]
-        public void ShippingServiceTotalCost_Large_ParcelWithoutSpeedyShipping_CorrectCost()
+        public void CalculateTotalCost_LargeParcel_WithinWeightLimit_ReturnsCorrectCost()
         {
             // Arrange
-            Parcel parcel = new Parcel(80, 80, 80);
+            Parcel parcel = new Parcel(80, 80, 80, 6); // Large parcel within weight limit
             ShippingService service = new ShippingService(parcel, false);
 
             // Act
@@ -81,25 +75,23 @@ namespace CourierTests
         }
 
         [TestMethod]
-        public void ShippingServiceTotalCost_Large_ParcelWithSpeedyShipping_CorrectCost()
+        public void CalculateTotalCost_LargeParcel_ExceedsWeightLimit_ReturnsCorrectCost()
         {
             // Arrange
-            Parcel parcel = new Parcel(80, 80, 80);
-            ShippingService service = new ShippingService(parcel, true);
-
+            Parcel parcel = new Parcel(80, 80, 80, 7); // Large parcel exceeds weight limit
+            ShippingService service = new ShippingService(parcel, false);
             // Act
             double totalCost = service.ShippingServiceTotalCost();
-            double parcelBaseCost = service.BaseCost();
+
             // Assert
-            Assert.AreEqual(30.0, totalCost);
-            Assert.AreEqual(15.0, parcelBaseCost);
+            Assert.AreEqual(17.0, totalCost);
         }
 
         [TestMethod]
-        public void ShippingServiceTotalCost_XL_ParcelWithoutSpeedyShipping_CorrectCost()
+        public void CalculateTotalCost_XLParcel_WithinWeightLimit_ReturnsCorrectCost()
         {
             // Arrange
-            Parcel parcel = new Parcel(120, 120, 120);
+            Parcel parcel = new Parcel(120, 120, 120, 9); // XL parcel within weight limit
             ShippingService service = new ShippingService(parcel, false);
 
             // Act
@@ -110,19 +102,17 @@ namespace CourierTests
         }
 
         [TestMethod]
-        public void ShippingServiceTotalCost_XL_ParcelWithSpeedyShipping_CorrectCost()
+        public void CalculateTotalCost_XLParcel_ExceedsWeightLimit_ReturnsCorrectCost()
         {
             // Arrange
-            Parcel parcel = new Parcel(120, 120, 120);
-            ShippingService service = new ShippingService(parcel, true);
+            Parcel parcel = new Parcel(120, 120, 120, 11);
+            ShippingService service = new ShippingService(parcel, false);
 
             // Act
             double totalCost = service.ShippingServiceTotalCost();
-            double parcelBaseCost = service.BaseCost();
 
             // Assert
-            Assert.AreEqual(50.0, totalCost);
-            Assert.AreEqual(25.0, parcelBaseCost);
+            Assert.AreEqual(27.0, totalCost);
         }
     }
 }
