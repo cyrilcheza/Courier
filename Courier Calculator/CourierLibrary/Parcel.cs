@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CourierLibrary
+﻿namespace CourierLibrary
 {
     public class Parcel
     {
@@ -13,35 +7,79 @@ namespace CourierLibrary
         private const double LargeParcelCost = 15;
         private const double XLParcelCost = 25;
 
-        private double _length { set; get; }
-        private double _width { set; get; }
-        private double _height { set; get; }  
+        private const double SmallParcelWeightLimit = 1;
+        private const double MediumParcelWeightLimit = 3;
+        private const double LargeParcelWeightLimit = 6;
+        private const double XLParcelWeightLimit = 10;
 
-        public Parcel(double lenght, double width, double height)
+        private readonly double _weight;
+        private readonly double _length;
+        private readonly double _width;
+        private readonly double _height;
+
+        public Parcel(double length, double width, double height, double weight)
         {
-            _length = lenght;
+            _length = length;
             _width = width;
             _height = height;
+            _weight = weight;
         }
 
         /// <summary>
-        /// Calculates a parcel cost
+        /// Calculates the cost of the parcel
         /// </summary>
-        /// <returns>Value of the parcel</returns>
+        /// <returns>The total cost of the parcel</returns>
         public double CalculateTotalCost()
         {
+            double excessWeight = CalculateExcessWeight();
+
             if (_length < 10 && _width < 10 && _height < 10)
-                return SmallParcelCost;
+            {
+                return CalculateCost(SmallParcelCost, SmallParcelWeightLimit, excessWeight);
+            }
 
             if (_length < 50 && _width < 50 && _height < 50)
-                return MediumParcelCost;
-            
+            {
+                return CalculateCost(MediumParcelCost, MediumParcelWeightLimit, excessWeight);
+            }
 
             if (_length < 100 && _width < 100 && _height < 100)
-                return LargeParcelCost;
-            
-            
-            return XLParcelCost;
+            {
+                return CalculateCost(LargeParcelCost, LargeParcelWeightLimit, excessWeight);
+            }
+
+            return CalculateCost(XLParcelCost, XLParcelWeightLimit, excessWeight);
+        }
+
+        private double CalculateExcessWeight()
+        {
+            double excessWeight = _weight - GetWeightLimit();
+            return excessWeight > 0 ? excessWeight : 0;
+        }
+
+        private double GetWeightLimit()
+        {
+            if (_length < 10 && _width < 10 && _height < 10)
+            {
+                return SmallParcelWeightLimit;
+            }
+
+            if (_length < 50 && _width < 50 && _height < 50)
+            {
+                return MediumParcelWeightLimit;
+            }
+
+            if (_length < 100 && _width < 100 && _height < 100)
+            {
+                return LargeParcelWeightLimit;
+            }
+
+            return XLParcelWeightLimit;
+        }
+
+        private double CalculateCost(double baseCost, double weightLimit, double excessWeight)
+        {
+            return baseCost + (excessWeight * 2);
         }
     }
 }
