@@ -11,7 +11,7 @@ namespace CourierTests
         public void CalculateTotalCost_SmallParcel_CorrectCost()
         {
             // Arrange
-            Parcel parcel = new Parcel(1, 1, 1, 1); 
+            Parcel parcel = new Parcel(1, 1, 1, 1,false); 
 
             // Act
             double totalCost = parcel.CalculateTotalCost();
@@ -24,7 +24,7 @@ namespace CourierTests
         public void CalculateTotalCost_MediumParcel_CorrectCost()
         {
             // Arrange
-            Parcel parcel = new Parcel(30, 30, 30,2);
+            Parcel parcel = new Parcel(30, 30, 30,2,false);
 
             // Act
             double totalCost = parcel.CalculateTotalCost();
@@ -37,7 +37,7 @@ namespace CourierTests
         public void CalculateTotalCost_LargeParcel_CorrectCost()
         {
             // Arrange
-            Parcel parcel = new Parcel(80, 80, 80,3);
+            Parcel parcel = new Parcel(80, 80, 80,3, false);
 
             // Act
             double totalCost = parcel.CalculateTotalCost();
@@ -50,7 +50,7 @@ namespace CourierTests
         public void CalculateTotalCost_XLParcel_CorrectCost()
         {
             // Arrange
-            Parcel parcel = new Parcel(120, 120, 120,4); 
+            Parcel parcel = new Parcel(120, 120, 120,4, false); 
 
             // Act
             double totalCost = parcel.CalculateTotalCost();

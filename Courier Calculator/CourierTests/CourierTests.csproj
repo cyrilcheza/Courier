@@ -54,7 +54,7 @@
   <ItemGroup>
     <Compile Include="ParcelShippingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ShippingServiceTests.cs" />
+    <Compile Include="ShippingTestsWithWeightLimits.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

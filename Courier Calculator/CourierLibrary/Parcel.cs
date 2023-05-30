@@ -16,24 +16,35 @@
         private double HeavyExcessPlaceholder = 0;
 
         private double _weight { get; set; }
+        private bool _isSpeedyDelivery { get; }
         private readonly double _length;
         private readonly double _width;
         private readonly double _height;
 
-        public Parcel(double length, double width, double height, double weight)
+        public Parcel(double length, double width, double height, double weight, bool isSpeedyDelivery)
         {
             _length = length;
             _width = width;
             _height = height;
             _weight = weight;
+            _isSpeedyDelivery = isSpeedyDelivery;
         }
 
-        /// <summary>
-        /// Calculates the cost of the parcel
-        /// </summary>
-        /// <returns>The total cost of the parcel</returns>
-        public double CalculateTotalCost()
+        public double CalculateTotalCostWithSpeedyDelivery()
         {
+            if (_isSpeedyDelivery)
+            {
+                return CalculateTotalCost() * 2;
+            }
+            return 0; //no speedy cost can be applied
+        }
+
+            /// <summary>
+            /// Calculates the cost of the parcel
+            /// </summary>
+            /// <returns>The total cost of the parcel</returns>
+            public double CalculateTotalCost()
+            {
             double excessWeight = CalculateExcessWeight();
 
             if (_length < 10 && _width < 10 && _height < 10)
