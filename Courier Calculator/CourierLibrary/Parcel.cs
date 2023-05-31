@@ -30,6 +30,11 @@
             _isSpeedyDelivery = isSpeedyDelivery;
         }
 
+        public double CalculateOverallCost()
+        {
+            return CalculateTotalCostWithSpeedyDelivery() + CalculateTotalCost();
+        }
+
         public double CalculateTotalCostWithSpeedyDelivery()
         {
             if (_isSpeedyDelivery)
@@ -65,6 +70,27 @@
             return CalculateCost(XLParcelCost, XLParcelWeightLimit, excessWeight);
         }
 
+
+        public ParcelType GetParcelType()
+        {
+
+            if (_length < 10 && _width < 10 && _height < 10)
+            {
+                return ParcelType.Small;
+            }
+
+            if (_length < 50 && _width < 50 && _height < 50)
+            {
+                return ParcelType.Medium;
+            }
+
+            if (_length < 100 && _width < 100 && _height < 100)
+            {
+                return ParcelType.Large;
+            }
+
+            return ParcelType.XL;
+        }
         private double CalculateExcessWeight()
         {
 
